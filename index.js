@@ -48,11 +48,6 @@ const newPhoneNum = () => {
   return newNum.join("");
 };
 
-app.get("/", (request, response) => {
-   response.send('<h1>Welcome</h1>');
-
-});
-
 app.get("/api/persons", (request, response) => {
   response.json(persons);
 });
