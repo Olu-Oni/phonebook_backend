@@ -1,7 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
-const app = express();
+const cors = require('cors')
 
+const app = express();
+app.use(cors());
 app.use(express.json());
 // morgan.token('info', (tokens, res,req)=>{
 //   return [
@@ -86,7 +88,7 @@ app.post("/api/persons", (request, response) => {
 
   if (!body.name) {
     return response.status(400).json({
-      error: "content missing",
+      error: "name missing",
     });
   }
   if (persons.find((p) => p.name === body.name)) {
@@ -104,7 +106,7 @@ app.post("/api/persons", (request, response) => {
   response.json(person);
 });
 
-const PORT = 3002;
+const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
